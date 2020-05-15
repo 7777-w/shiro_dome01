@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    username: root
+    password: 330124
+    #?serverTimezone=UTC 解决时区错误
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+    #SpringBoot是不注入这些属性值的需要自己绑定
+    #druid 数据源配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle:
+    dbcp2:
+      test-on-borrow: true
+      test-on-return: true
+      pool-prepared-statements: true
+
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    userGlobalDatasourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+mybatis:
+  #信息输出设置
+  # xml地址
+  mapper-locations: classpath:mapper/*Dao.xml
+  type-aliases-package: com.zxc.entity
